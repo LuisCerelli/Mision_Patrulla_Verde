@@ -159,20 +159,27 @@ document.querySelector('[data-action="check-q3"]')?.addEventListener('click', ()
   hideFeedback('feedback-q3');
   const selected = document.querySelector('input[name="q3"]:checked');
   if (!selected) {
-    showFeedback('feedback-q3', 'Seleccioná una respuesta antes de comprobar.', 'warning');
-    return;
-  }
+  showFeedback('feedback-q5', 'Seleccioná una respuesta antes de comprobar.', 'warning');
+  lockContinueButton(3);
+  return;
+}
   state.answers.q3 = selected.value;
   const correct = selected.value === 'basura';
   state.screensCompleted.q3correct = correct;
 
   const options = document.querySelectorAll('#screen-3 input[name="q3"]');
   options.forEach(o => {
-    const label = o.closest('.option');
-    label.classList.remove('correct','incorrect');
-    if (o.value === 'basura') label.classList.add('correct');
-    if (o.checked && o.value !== 'basura') label.classList.add('incorrect');
-  });
+  const label = o.closest('.option');
+  label.classList.remove('correct', 'incorrect');
+
+  if (correct && o.value === 'basura') {
+    label.classList.add('correct');
+  }
+
+  if (!correct && o.checked) {
+    label.classList.add('incorrect');
+  }
+});
 
   if (correct) {
     showFeedback('feedback-q3', 'Muy bien. Sebastián se preocupó porque el barrio estaba sucio: había basura en las calles, bolsas rotas y papeles que llegaban hasta el parque. Reconocer el problema es el primer paso para poder ayudar.', 'success');
@@ -190,20 +197,27 @@ document.querySelector('[data-action="check-q4"]')?.addEventListener('click', ()
   hideFeedback('feedback-q4');
   const selected = document.querySelector('input[name="q4"]:checked');
   if (!selected) {
-    showFeedback('feedback-q4', 'Seleccioná una respuesta antes de comprobar.', 'warning');
-    return;
-  }
+  showFeedback('feedback-q5', 'Seleccioná una respuesta antes de comprobar.', 'warning');
+  lockContinueButton(4);
+  return;
+}
   state.answers.q4 = selected.value;
   const correct = selected.value === 'basura';
   state.screensCompleted.q4correct = correct;
 
   const options = document.querySelectorAll('#screen-4 input[name="q4"]');
   options.forEach(o => {
-    const label = o.closest('.option');
-    label.classList.remove('correct','incorrect');
-    if (o.value === 'basura') label.classList.add('correct');
-    if (o.checked && o.value !== 'basura') label.classList.add('incorrect');
-  });
+  const label = o.closest('.option');
+  label.classList.remove('correct', 'incorrect');
+
+  if (correct && o.value === 'basura') {
+    label.classList.add('correct');
+  }
+
+  if (!correct && o.checked) {
+    label.classList.add('incorrect');
+  }
+});
 
   if (correct) {
     showFeedback('feedback-q4', 'Correcto. El barrio estaba sucio porque había basura en las calles y papeles en el parque.', 'success');
@@ -221,20 +235,27 @@ document.querySelector('[data-action="check-q5"]')?.addEventListener('click', ()
   hideFeedback('feedback-q5');
   const selected = document.querySelector('input[name="q5"]:checked');
   if (!selected) {
-    showFeedback('feedback-q5', 'Seleccioná una respuesta antes de comprobar.', 'warning');
-    return;
-  }
+  showFeedback('feedback-q5', 'Seleccioná una respuesta antes de comprobar.', 'warning');
+  lockContinueButton(5);
+  return;
+}
   state.answers.q5 = selected.value;
   const correct = selected.value === 'equipo';
   state.screensCompleted.q5correct = correct;
 
   const options = document.querySelectorAll('#screen-5 input[name="q5"]');
   options.forEach(o => {
-    const label = o.closest('.option');
-    label.classList.remove('correct','incorrect');
-    if (o.value === 'equipo') label.classList.add('correct');
-    if (o.checked && o.value !== 'equipo') label.classList.add('incorrect');
-  });
+  const label = o.closest('.option');
+  label.classList.remove('correct', 'incorrect');
+
+  if (correct && o.value === 'equipo') {
+    label.classList.add('correct');
+  }
+
+  if (!correct && o.checked) {
+    label.classList.add('incorrect');
+  }
+});
 
   if (correct) {
     showFeedback('feedback-q5', 'Excelente decisión. Los problemas ambientales se resuelven mejor cuando las personas trabajan juntas.', 'success');
@@ -345,20 +366,27 @@ document.querySelector('[data-action="check-q8"]')?.addEventListener('click', ()
   hideFeedback('feedback-q8');
   const selected = document.querySelector('input[name="q8"]:checked');
   if (!selected) {
-    showFeedback('feedback-q8', 'Seleccioná una respuesta antes de comprobar.', 'warning');
-    return;
-  }
+  showFeedback('feedback-q5', 'Seleccioná una respuesta antes de comprobar.', 'warning');
+  lockContinueButton(8);
+  return;
+}
   state.answers.q8 = selected.value;
   const correct = selected.value === 'todos';
   state.screensCompleted.q8correct = correct;
 
   const options = document.querySelectorAll('#screen-8 input[name="q8"]');
   options.forEach(o => {
-    const label = o.closest('.option');
-    label.classList.remove('correct','incorrect');
-    if (o.value === 'todos') label.classList.add('correct');
-    if (o.checked && o.value !== 'todos') label.classList.add('incorrect');
-  });
+  const label = o.closest('.option');
+  label.classList.remove('correct', 'incorrect');
+
+  if (correct && o.value === 'todos') {
+    label.classList.add('correct');
+  }
+
+  if (!correct && o.checked) {
+    label.classList.add('incorrect');
+  }
+});
 
   if (correct) {
     showFeedback('feedback-q8', 'Muy bien. El barrio cambió porque Sebastián, sus amigos y los vecinos se organizaron para cuidarlo.', 'success');

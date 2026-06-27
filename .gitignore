@@ -1,0 +1,29 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor settings
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.log
+
+# Internal assistant / production files
+AGENTS.md
+spec/
+
+# Private README drafts
+README_REAL_Y_PRIMERO.md
+
+# Internal working notes and production documents
+Tabla_tecnica_produccion_OA_Mision_Patrulla_Verde.md
+notas-de-continuidad.md
+notas-de-sesion.md
+
+# Internal working notes and production documents inside docs/
+docs/Tabla_tecnica_produccion_OA_Mision_Patrulla_Verde.md
+docs/notas-de-continuidad.md
+docs/notas-de-sesion.md

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Misión Patrulla Verde</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Pacifico&family=Satisfy&display=swap"
+    rel="stylesheet">
+</head>
+<body>
+
+  <main id="app">
+
+    <!-- Pantalla 1: Bienvenida -->
+    <section class="screen active" id="screen-1">
+        <div class="container container-book">
+            <div class="brand-floating">
+                <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+            </div>
+    
+            <div class="screen-content-desktop">
+                <div class="book-image">
+                    <div class="img-placeholder" data-img="bienvenida-sebastian-barrio.png">
+                        <span>Sebastián observando el barrio Villa Mar</span>
+                    </div>
+                </div>
+    
+                <div class="book-text">
+                    <h1>Misión Patrulla Verde</h1>
+                    <p>En el barrio Villa Mar hay basura en las calles, papeles en el parque y los vecinos están
+                        preocupados. Sebastián necesita tu ayuda para formar la Patrulla Verde y cuidar el ambiente.</p>
+                    <p>¿Acompañás a Sebastián en esta misión?</p>
+                    <button class="btn btn-primary" data-action="go-to-2">Comenzar misión</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pantalla 2: Registro -->
+    <section class="screen" id="screen-2">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder img-credencial" data-img="credencial-patrullero.png">
+          <span>Tarjeta de Patrullero Verde</span>
+        </div>
+        <h2>Antes de comenzar</h2>
+        <p>Completá tus datos para iniciar la misión y recibir tu evidencia final como Patrullero Verde.</p>
+        <form id="form-registro" novalidate>
+          <div class="form-group">
+            <label for="input-nombre">Nombre completo *</label>
+            <input type="text" id="input-nombre" required placeholder="Ej: Lucía Martínez">
+            <span class="feedback-field" id="feedback-nombre"></span>
+          </div>
+          <div class="form-group">
+            <label for="input-grado">Grado escolar *</label>
+            <input type="text" id="input-grado" required placeholder="Ej: 3° de primaria">
+            <span class="feedback-field" id="feedback-grado"></span>
+          </div>
+          <div class="form-group">
+            <label for="input-institucion">Institución educativa *</label>
+            <input type="text" id="input-institucion" required placeholder="Ej: Escuela N° 20">
+            <span class="feedback-field" id="feedback-institucion"></span>
+          </div>
+          <div class="form-group">
+            <label for="input-area">Área o asignatura</label>
+            <input type="text" id="input-area" placeholder="Ej: Ciencias Naturales">
+          </div>
+          <div class="form-group">
+            <label for="input-docente">Docente *</label>
+            <input type="text" id="input-docente" required placeholder="Ej: Srta. Ana">
+            <span class="feedback-field" id="feedback-docente"></span>
+          </div>
+          <button type="submit" class="btn btn-primary" id="btn-guardar-registro">Guardar registro y comenzar</button>
+        </form>
+        <div class="feedback-general" id="feedback-registro"></div>
+      </div>
+    </section>
+
+    <!-- Pantalla 3: Presentación del cuento -->
+    <section class="screen" id="screen-3">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="villa-mar-sebastian.png">
+          <span>Villa Mar con Sebastián, vecinos y basura en las calles</span>
+        </div>
+        <h2>Conocemos la historia</h2>
+        <div class="story-text">
+          <p>Los vecinos de Villa Mar notan basura en las calles. Los perros rompen las bolsas, el viento lleva papeles al parque y a Sebastián le preocupa ver su barrio sucio.</p>
+        </div>
+        <div class="question">
+          <p class="question-text">¿Qué problema empezó a preocupar a Sebastián en el barrio Villa Mar?</p>
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q3" value="basura">
+                Había basura en las calles y papeles en el parque
+            </label>
+            <label class="option">
+              <input type="radio" name="q3" value="arboles">
+                El barrio tenía demasiados árboles
+            </label>
+            <label class="option">
+              <input type="radio" name="q3" value="nombre">
+                Los vecinos querían cambiar el nombre del barrio
+            </label>
+          </div>
+          <button class="btn btn-secondary" data-action="check-q3">Comprobar respuesta</button>
+          <div class="feedback-general" id="feedback-q3"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-4">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 4: Observamos el problema -->
+    <section class="screen" id="screen-4">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="villa-mar-basura.png">
+          <span>Villa Mar con basura en las calles y papeles en el parque</span>
+        </div>
+        <h2>¿Qué está pasando en Villa Mar?</h2>
+        <p>Observá la imagen y pensá qué problema afecta al barrio.</p>
+        <div class="question">
+          <p class="question-text">¿Qué problema había en el barrio Villa Mar?</p>
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q4" value="basura">
+              Había mucha basura en las calles
+            </label>
+            <label class="option">
+              <input type="radio" name="q4" value="flores">
+              Había demasiadas flores en el parque
+            </label>
+            <label class="option">
+              <input type="radio" name="q4" value="frio">
+              Los niños no querían jugar porque hacía frío
+            </label>
+          </div>
+          <button class="btn btn-secondary" data-action="check-q4">Comprobar respuesta</button>
+          <div class="feedback-general" id="feedback-q4"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-5">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 5: Tomamos una decisión -->
+    <section class="screen" id="screen-5">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="sebastian-pensando.png">
+          <span>Sebastián pensando con escenas alrededor: quejarse, trabajar en equipo, tirar basura</span>
+        </div>
+        <h2>¿Qué debería hacer Sebastián?</h2>
+        <p>Sebastián está preocupado y debe decidir qué hacer.</p>
+        <div class="question">
+          <p class="question-text">¿Cuál sería la mejor primera acción de Sebastián?</p>
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q5" value="quejarse">
+              Quejarse y no hacer nada
+            </label>
+            <label class="option">
+              <input type="radio" name="q5" value="equipo">
+              Formar un grupo con sus amigos para ayudar
+            </label>
+            <label class="option">
+              <input type="radio" name="q5" value="tirar">
+              Tirar más basura para que todos se den cuenta
+            </label>
+          </div>
+          <button class="btn btn-secondary" data-action="check-q5">Comprobar respuesta</button>
+          <div class="feedback-general" id="feedback-q5"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-6">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 6: Armamos la Patrulla Verde -->
+    <section class="screen" id="screen-6">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="patrulla-verde.png">
+          <span>Sebastián y amigos con carteles ambientales y bolsas de basura</span>
+        </div>
+        <h2>Construimos la Patrulla Verde</h2>
+        <p>Sebastián invita a María, Luis y Ana. Van casa por casa explicando cómo separar la basura y cuidar el agua.</p>
+        <div class="question">
+          <p class="question-text">Elegí las acciones que ayudan a cuidar el barrio.</p>
+          <div class="options options-multi" id="q6-options">
+            <label class="option option-check">
+              <input type="checkbox" value="separar">
+              Separar la basura
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="no-desperdiciar">
+              No desperdiciar el agua
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="carteles">
+              Hacer carteles para informar
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="limpieza">
+              Organizar limpieza del parque
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="plantas">
+              Cuidar plantas
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="tirar-papeles">
+              Tirar papeles en la calle
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="romper-bolsas">
+              Romper bolsas de basura
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="canillas">
+              Dejar canillas abiertas
+            </label>
+            <label class="option option-check">
+              <input type="checkbox" value="ensuciar">
+              Ensuciar el parque
+            </label>
+          </div>
+          <button class="btn btn-secondary" data-action="check-q6">Comprobar mis elecciones</button>
+          <div class="feedback-general" id="feedback-q6"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-7">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 7: Frases que ayudan a cambiar -->
+    <section class="screen" id="screen-7">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="carteles-ambientales.png">
+          <span>Sebastián y amigos creando carteles ambientales</span>
+        </div>
+        <h2>Creamos mensajes para el barrio</h2>
+        <p>Sebastián y sus amigos hacen carteles para invitar a cuidar el ambiente. Elegí una frase o escribí la tuya.</p>
+        <div class="question">
+          <p class="question-text">Mi frase para cuidar el barrio:</p>
+          <div class="options" id="q7-options">
+            <label class="option">
+              <input type="radio" name="q7" value="Mi barrio limpio es mi compromiso">
+              Mi barrio limpio es mi compromiso
+            </label>
+            <label class="option">
+              <input type="radio" name="q7" value="Cuidar el agua es cuidar la vida">
+              Cuidar el agua es cuidar la vida
+            </label>
+            <label class="option">
+              <input type="radio" name="q7" value="La basura en su lugar, el barrio va a mejorar">
+              La basura en su lugar, el barrio va a mejorar
+            </label>
+            <label class="option">
+              <input type="radio" name="q7" value="Cuidar el ambiente también depende de mí">
+              Cuidar el ambiente también depende de mí
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="input-frase-propia">O escribí tu propia frase:</label>
+            <textarea id="input-frase-propia" rows="2" placeholder="Mi frase para cuidar el barrio es:"></textarea>
+          </div>
+          <button class="btn btn-secondary" data-action="save-q7">Guardar mi frase</button>
+          <div class="feedback-general" id="feedback-q7"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-8">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 8: Resultado de la misión -->
+    <section class="screen" id="screen-8">
+      <div class="container">
+        <div class="brand-floating">
+          <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="villa-mar-limpio.png">
+          <span>Villa Mar limpio con vecinos felices</span>
+        </div>
+        <h2>El barrio respira feliz</h2>
+        <div class="story-text">
+          <p>Una semana después, el barrio está limpio. El alcalde felicita a la Patrulla Verde y coloca un letrero. Sebastián dice: "Cuando cuidamos juntos, nuestro barrio respira feliz."</p>
+        </div>
+        <div class="question">
+          <p class="question-text">¿Por qué cambió el barrio Villa Mar?</p>
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="q8" value="todos">
+              Porque todos trabajaron juntos
+            </label>
+            <label class="option">
+              <input type="radio" name="q8" value="magia">
+              Porque la basura desapareció sola
+            </label>
+            <label class="option">
+              <input type="radio" name="q8" value="nada">
+              Porque Sebastián no hizo nada
+            </label>
+          </div>
+          <button class="btn btn-secondary" data-action="check-q8">Comprobar respuesta</button>
+          <div class="feedback-general" id="feedback-q8"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-9">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 9: Compromiso final -->
+    <section class="screen" id="screen-9">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="compromiso.png">
+          <span>Sebastián escribiendo en un cuaderno con barrio limpio de fondo</span>
+        </div>
+        <h2>Mi compromiso como Patrullero Verde</h2>
+        <p>Pensá qué acción podés hacer en tu casa, escuela o barrio para cuidar el ambiente.</p>
+        <div class="question">
+          <div class="form-group">
+            <label for="input-compromiso"><strong>Me comprometo a:</strong></label>
+            <textarea id="input-compromiso" rows="3" placeholder="Ej: separar los residuos en mi casa, cerrar la canilla al lavarme los dientes..."></textarea>
+          </div>
+          <div class="help-ideas">
+            <p>Algunas ideas:</p>
+            <ul>
+              <li>No tirar basura al piso</li>
+              <li>Cerrar la canilla</li>
+              <li>Separar residuos</li>
+              <li>Cuidar plantas</li>
+              <li>Invitar a otros a cuidar</li>
+              <li>Reutilizar materiales</li>
+            </ul>
+          </div>
+          <button class="btn btn-secondary" data-action="save-q9">Guardar mi compromiso</button>
+          <div class="feedback-general" id="feedback-q9"></div>
+          <button class="btn btn-continue is-locked hidden" data-action="go-to-10">Quiero continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pantalla 10: Evidencia final -->
+    <section class="screen" id="screen-10">
+      <div class="container">
+        <div class="brand-floating">
+            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+        </div>
+        <div class="img-placeholder" data-img="certificado-patrullero.png">
+          <span>Certificado de Patrullero Verde</span>
+        </div>
+        <h2>Certificado de Patrullero Verde</h2>
+        <div id="evidence-content" class="evidence-box">
+          <p class="evidence-title">Misión Patrulla Verde</p>
+          <p>Se reconoce a <strong id="ev-nombre"></strong> por completar la misión y aprender que cuidar el ambiente empieza con pequeñas acciones realizadas en comunidad.</p>
+          <div class="evidence-data">
+            <p><strong>Grado:</strong> <span id="ev-grado"></span></p>
+            <p><strong>Institución:</strong> <span id="ev-institucion"></span></p>
+            <p><strong>Docente:</strong> <span id="ev-docente"></span></p>
+            <p><strong>Fecha:</strong> <span id="ev-fecha"></span></p>
+            <p><strong>Compromiso:</strong> <span id="ev-compromiso"></span></p>
+            <p><strong>Frase:</strong> <span id="ev-frase"></span></p>
+          </div>
+        </div>
+        <div class="feedback-general" id="feedback-q10"></div>
+        <button class="btn btn-primary" data-action="download-evidence">Descargar evidencia</button>
+        <button class="btn btn-secondary" data-action="print-evidence">Imprimir</button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

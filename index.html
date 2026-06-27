@@ -248,37 +248,42 @@
     <section class="screen" id="screen-7">
       <div class="container">
         <div class="brand-floating">
-            <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
+          <img src="assets/logos/LogoHDC.jpg" alt="Asociación Huella de Carbono">
         </div>
+
         <div class="img-placeholder" data-img="carteles-ambientales.png">
           <span>Sebastián y amigos creando carteles ambientales</span>
         </div>
+
         <h2>Creamos mensajes para el barrio</h2>
-        <p>Sebastián y sus amigos hacen carteles para invitar a cuidar el ambiente. Elegí una frase o escribí la tuya.</p>
+
+        <p>
+          Sebastián y sus amigos hacen carteles para invitar a cuidar el ambiente.
+          Ahora pensá tu propio mensaje para ayudar a cuidar tu casa, tu escuela o tu barrio.
+        </p>
+
         <div class="question">
-          <p class="question-text">Mi frase para cuidar el barrio:</p>
-          <div class="options" id="q7-options">
-            <label class="option">
-              <input type="radio" name="q7" value="Mi barrio limpio es mi compromiso">
-              Mi barrio limpio es mi compromiso
-            </label>
-            <label class="option">
-              <input type="radio" name="q7" value="Cuidar el agua es cuidar la vida">
-              Cuidar el agua es cuidar la vida
-            </label>
-            <label class="option">
-              <input type="radio" name="q7" value="La basura en su lugar, el barrio va a mejorar">
-              La basura en su lugar, el barrio va a mejorar
-            </label>
-            <label class="option">
-              <input type="radio" name="q7" value="Cuidar el ambiente también depende de mí">
-              Cuidar el ambiente también depende de mí
-            </label>
-          </div>
           <div class="form-group">
-            <label for="input-frase-propia">O escribí tu propia frase:</label>
-            <textarea id="input-frase-propia" rows="2" placeholder="Mi frase para cuidar el barrio es:"></textarea>
+            <label for="input-frase-propia"><strong>Mi frase para cuidar el barrio es:</strong></label>
+            <textarea
+              id="input-frase-propia"
+              rows="3"
+              placeholder="Ej: Cuidar el agua también es cuidar nuestro futuro..."
+            ></textarea>
           </div>
+
+          <div class="help-ideas">
+            <p>Algunas ideas para inspirarte:</p>
+            <ul>
+              <li>Cuidar el agua</li>
+              <li>Separar los residuos</li>
+              <li>No tirar basura en la calle</li>
+              <li>Cuidar las plantas y los árboles</li>
+              <li>Mantener limpio el barrio</li>
+              <li>Invitar a otros a cuidar el ambiente</li>
+            </ul>
+          </div>
+
           <button class="btn btn-secondary" data-action="save-q7">Guardar mi frase</button>
           <div class="feedback-general" id="feedback-q7"></div>
           <button class="btn btn-continue is-locked hidden" data-action="go-to-8">Quiero continuar</button>

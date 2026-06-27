@@ -9,12 +9,14 @@ const state = {
     docente: ''
   },
   answers: {
-    q3: null,
-    q4: null,
-    q5: null,
-    q6: [],
-    q8: null
-  },
+  q3: null,
+  q4: null,
+  q5: null,
+  q6: [],
+  q7: null,
+  q8: null,
+  q9: null
+},
   phrase: '',
   commitment: '',
   screensCompleted: {}
@@ -334,30 +336,90 @@ if (allCorrectSelected && noIncorrectSelected) {
 /* === Screen 7: Phrase === */
 document.querySelector('[data-action="save-q7"]')?.addEventListener('click', () => {
   hideFeedback('feedback-q7');
-  const selectedRadio = document.querySelector('input[name="q7"]:checked');
+
   const customText = $('#input-frase-propia').value.trim();
-
-  let phrase = '';
-
-  if (selectedRadio) {
-    phrase = selectedRadio.value;
-  } else if (customText) {
-    phrase = customText;
-  }
+  const phrase = customText;
 
   if (!phrase) {
-    showFeedback('feedback-q7', 'Antes de continuar, elegí una frase o escribí la tuya.', 'warning');
+    showFeedback(
+      'feedback-q7',
+      'Antes de continuar, escribí una frase para cuidar el barrio o el ambiente.',
+      'warning'
+    );
+    state.screensCompleted[7] = false;
+    lockContinueButton(7);
     return;
   }
 
-  if (customText && customText.length < 5) {
-    showFeedback('feedback-q7', 'Intentá escribir una frase más clara.', 'warning');
+  if (phrase.length < 10) {
+    showFeedback(
+      'feedback-q7',
+      'Tu frase puede ser más clara. Intentá escribir un mensaje un poco más completo.',
+      'warning'
+    );
+    state.screensCompleted[7] = false;
+    lockContinueButton(7);
+    return;
+  }
+
+  const environmentalWords = [
+    'ambiente',
+    'ambiental',
+    'barrio',
+    'basura',
+    'residuo',
+    'residuos',
+    'reciclar',
+    'reciclaje',
+    'agua',
+    'canilla',
+    'plantas',
+    'árbol',
+    'arbol',
+    'árboles',
+    'arboles',
+    'naturaleza',
+    'planeta',
+    'verde',
+    'limpio',
+    'limpieza',
+    'cuidar',
+    'cuidado',
+    'contaminación',
+    'contaminacion',
+    'comunidad',
+    'escuela',
+    'reutilizar',
+    'separar'
+  ];
+
+  const normalizedPhrase = phrase.toLowerCase();
+
+  const hasEnvironmentalMeaning = environmentalWords.some((word) =>
+    normalizedPhrase.includes(word)
+  );
+
+  if (!hasEnvironmentalMeaning) {
+    showFeedback(
+      'feedback-q7',
+      'Tu frase puede estar más relacionada con la misión. Probá escribir un mensaje sobre cuidar el ambiente, el agua, las plantas, separar residuos, mantener limpio el barrio o ayudar a la comunidad.',
+      'warning'
+    );
+    state.screensCompleted[7] = false;
+    lockContinueButton(7);
     return;
   }
 
   state.phrase = phrase;
+  state.answers.q7 = phrase;
   state.screensCompleted[7] = true;
-  showFeedback('feedback-q7', 'Muy buena elección. Las frases ayudan a que más personas recuerden la importancia de cuidar el barrio y el ambiente.', 'success');
+
+  showFeedback(
+    'feedback-q7',
+    'Muy buena frase. Los mensajes ambientales ayudan a que más personas recuerden la importancia de cuidar el barrio y el ambiente.',
+    'success'
+  );
+
   unlockContinueButton(7);
 });
 
@@ -402,20 +464,132 @@ document.querySelector('[data-action="check-q8"]')?.addEventListener('click', ()
 /* === Screen 9: Commitment === */
 document.querySelector('[data-action="save-q9"]')?.addEventListener('click', () => {
   hideFeedback('feedback-q9');
+
   const commitment = $('#input-compromiso').value.trim();
 
   if (!commitment) {
-    showFeedback('feedback-q9', 'Antes de terminar, escribí tu compromiso.', 'warning');
+    showFeedback(
+      'feedback-q9',
+      'Antes de terminar, escribí tu compromiso ambiental.',
+      'warning'
+    );
+    state.screensCompleted[9] = false;
+    lockContinueButton(9);
     return;
   }
-  if (commitment.length < 10) {
-    showFeedback('feedback-q9', 'Tu compromiso puede ser más claro. Contanos con más detalle qué acción vas a realizar.', 'warning');
+
+  if (commitment.length < 12) {
+    showFeedback(
+      'feedback-q9',
+      'Tu compromiso puede ser más claro. Escribí una acción concreta que puedas hacer para cuidar el ambiente.',
+      'warning'
+    );
+    state.screensCompleted[9] = false;
+    lockContinueButton(9);
+    return;
+  }
+
+  const normalizedCommitment = commitment
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+
+  const environmentalWords = [
+    'ambiente',
+    'ambiental',
+    'barrio',
+    'basura',
+    'residuo',
+    'residuos',
+    'reciclar',
+    'reciclaje',
+    'agua',
+    'canilla',
+    'plantas',
+    'arbol',
+    'arboles',
+    'naturaleza',
+    'planeta',
+    'verde',
+    'limpio',
+    'limpieza',
+    'contaminacion',
+    'comunidad',
+    'escuela',
+    'reutilizar',
+    'separar',
+    'materiales',
+    'energia',
+    'luz',
+    'papeles',
+    'plastico',
+    'botellas'
+  ];
+
+  const actionWords = [
+    'cuidar',
+    'cerrar',
+    'separar',
+    'reciclar',
+    'reutilizar',
+    'limpiar',
+    'levantar',
+    'juntar',
+    'tirar',
+    'no tirar',
+    'ahorrar',
+    'apagar',
+    'plantar',
+    'regar',
+    'proteger',
+    'ayudar',
+    'invitar',
+    'mantener',
+    'usar menos',
+    'evitar',
+    'reducir'
+  ];
+
+  const hasEnvironmentalMeaning = environmentalWords.some((word) =>
+    normalizedCommitment.includes(word)
+  );
+
+  const hasConcreteAction = actionWords.some((word) =>
+    normalizedCommitment.includes(word)
+  );
+
+  if (!hasEnvironmentalMeaning) {
+    showFeedback(
+      'feedback-q9',
+      'Tu compromiso tiene que estar relacionado con la misión. Probá escribir una acción sobre cuidar el ambiente, ahorrar agua, separar residuos, limpiar el barrio, cuidar plantas o evitar la contaminación.',
+      'warning'
+    );
+    state.screensCompleted[9] = false;
+    lockContinueButton(9);
+    return;
+  }
+
+  if (!hasConcreteAction) {
+    showFeedback(
+      'feedback-q9',
+      'Tu compromiso necesita una acción concreta. Podés empezar con: “Me comprometo a cuidar...”, “Me comprometo a separar...”, “Me comprometo a cerrar...”, “Me comprometo a limpiar...”',
+      'warning'
+    );
+    state.screensCompleted[9] = false;
+    lockContinueButton(9);
     return;
   }
 
   state.commitment = commitment;
+  state.answers.q9 = commitment;
   state.screensCompleted[9] = true;
-  showFeedback('feedback-q9', 'Excelente compromiso. Cada pequeña acción ayuda a cuidar mejor la casa, la escuela, el barrio y el planeta.', 'success');
+
+  showFeedback(
+    'feedback-q9',
+    'Excelente compromiso. Elegiste una acción concreta para cuidar la casa, la escuela, el barrio o el planeta.',
+    'success'
+  );
+
   unlockContinueButton(9);
 });
 

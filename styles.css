@@ -413,6 +413,12 @@ p {
     opacity: 0.92;
 }
 
+.cert-logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
 /* === Print === */
 @media print {
   body {

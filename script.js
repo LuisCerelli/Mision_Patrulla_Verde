@@ -614,12 +614,14 @@ document.querySelector('[data-action="download-evidence"]')?.addEventListener('c
   showFeedback('feedback-q10', 'Felicitaciones. Completaste la misión y ya sos parte de la Patrulla Verde.', 'success');
 
   const date = new Date().toLocaleDateString('es-AR');
+  const logoUrl = new URL('assets/logos/LogoHDC.jpg', window.location.href).href;
   const html = `<!DOCTYPE html>
 <html lang="es">
 <head><meta charset="UTF-8"><title>Certificado - Patrulla Verde</title>
 <style>
   body { font-family: 'Segoe UI', sans-serif; padding: 2rem; max-width: 700px; margin: auto; color: #1b4332; }
   .cert { border: 4px solid #2d6a4f; border-radius: 16px; padding: 2rem; text-align: center; }
+  .cert-logo { width: 110px; height: auto; margin-bottom: 1rem; }
   h1 { color: #1b4332; font-size: 1.75rem; margin-bottom: 0.5rem; }
   h2 { color: #2d6a4f; font-size: 1.2rem; }
   .data { text-align: left; margin: 1.5rem 0; }
@@ -629,6 +631,7 @@ document.querySelector('[data-action="download-evidence"]')?.addEventListener('c
 </style></head>
 <body>
 <div class="cert">
+  <img class="cert-logo" src="${logoUrl}" alt="Asociación Huella de Carbono">
   <h1>Misión Patrulla Verde</h1>
   <h2>Certificado de Patrullero Verde</h2>
   <p>Se reconoce a <strong>${s.nombre}</strong> por completar la misión y aprender que cuidar el ambiente empieza con pequeñas acciones realizadas en comunidad.</p>

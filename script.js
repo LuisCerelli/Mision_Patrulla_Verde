@@ -26,6 +26,27 @@ const state = {
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
+/* === Analytics helpers === */
+function trackAnalyticsEvent(eventName, params = {}) {
+  if (typeof gtag !== 'function') return;
+
+  gtag('event', eventName, params);
+}
+
+function trackScreenView(screenNumber) {
+  trackAnalyticsEvent('mission_screen_view', {
+    screen_number: screenNumber,
+    screen_name: `Pantalla ${screenNumber}`
+  });
+}
+
+function trackScreenCompleted(screenNumber, screenName) {
+  trackAnalyticsEvent('mission_screen_completed', {
+    screen_number: screenNumber,
+    screen_name: screenName
+  });
+}
+
 /* === Navigation === */
 function showScreen(num) {
   $$('.screen').forEach(s => s.classList.remove('active'));
@@ -33,6 +54,8 @@ function showScreen(num) {
   if (el) el.classList.add('active');
   state.currentScreen = num;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  trackScreenView(num);
 }
 
 function goNext(nextNum) {
@@ -153,6 +176,9 @@ $('#form-registro').addEventListener('submit', (e) => {
   state.student.docente = docente;
 
   state.screensCompleted[2] = true;
+
+  trackScreenCompleted(2, 'Registro completado');
+
   goNext(3);
 });
 
@@ -186,6 +212,9 @@ document.querySelector('[data-action="check-q3"]')?.addEventListener('click', ()
   if (correct) {
     showFeedback('feedback-q3', 'Muy bien. Sebastián se preocupó porque el barrio estaba sucio: había basura en las calles, bolsas rotas y papeles que llegaban hasta el parque. Reconocer el problema es el primer paso para poder ayudar.', 'success');
     state.screensCompleted[3] = true;
+
+    trackScreenCompleted(3, 'Problema inicial identificado');
+
     unlockContinueButton(3);
 } else {
     showFeedback('feedback-q3', 'Pensalo otra vez. En el fragmento se cuenta  que los vecinos notaron basura en las calles, que los perros rompían las bolsas y que el viento llevaba papeles hasta el parque. Volvé a leer esa parte y fijate qué situación afectaba al barrio.', 'error');
@@ -224,6 +253,9 @@ document.querySelector('[data-action="check-q4"]')?.addEventListener('click', ()
   if (correct) {
     showFeedback('feedback-q4', 'Correcto. El barrio estaba sucio porque había basura en las calles y papeles en el parque.', 'success');
     state.screensCompleted[4] = true;
+
+    trackScreenCompleted(4, 'Problema del barrio identificado');
+
     unlockContinueButton(4);
   } else {
     showFeedback('feedback-q4', 'Observá nuevamente la imagen y recordá el inicio del cuento. El problema no eran las flores ni el frío: los vecinos estaban preocupados porque había basura en las calles y papeles en el parque.', 'error');
@@ -262,6 +294,9 @@ document.querySelector('[data-action="check-q5"]')?.addEventListener('click', ()
   if (correct) {
     showFeedback('feedback-q5', 'Excelente decisión. Los problemas ambientales se resuelven mejor cuando las personas trabajan juntas.', 'success');
     state.screensCompleted[5] = true;
+
+    trackScreenCompleted(5, 'Decision de trabajo en equipo');
+
     unlockContinueButton(5);
     } else {
     showFeedback('feedback-q5', 'Probá otra vez. Quejarse o tirar más basura no ayuda a resolver el problema. Sebastián necesitaba buscar una acción positiva, invitar a otros y empezar a cuidar el barrio en equipo.', 'error');
@@ -326,6 +361,9 @@ const noIncorrectSelected = incorrectSelected.length === 0;
 
 if (allCorrectSelected && noIncorrectSelected) {
   state.screensCompleted[6] = true;
+
+  trackScreenCompleted(6, 'Acciones de patrulla seleccionadas');
+
   unlockContinueButton(6);
 } else {
   state.screensCompleted[6] = false;
@@ -414,6 +452,8 @@ document.querySelector('[data-action="save-q7"]')?.addEventListener('click', () 
   state.answers.q7 = phrase;
   state.screensCompleted[7] = true;
 
+  trackScreenCompleted(7, 'Frase ambiental guardada');
+
   showFeedback(
     'feedback-q7',
     'Muy buena frase. Los mensajes ambientales ayudan a que más personas recuerden la importancia de cuidar el barrio y el ambiente.',
@@ -453,6 +493,9 @@ document.querySelector('[data-action="check-q8"]')?.addEventListener('click', ()
   if (correct) {
     showFeedback('feedback-q8', 'Muy bien. El barrio cambió porque Sebastián, sus amigos y los vecinos se organizaron para cuidarlo.', 'success');
     state.screensCompleted[8] = true;
+
+    trackScreenCompleted(8, 'Comprension del cambio comunitario');
+
     unlockContinueButton(8);
     } else {
     showFeedback('feedback-q8', 'Pensalo otra vez. El barrio no cambió por magia ni porque una sola persona hizo todo. Cambió porque Sebastián, sus amigos y los vecinos trabajaron juntos para limpiar y cuidar el lugar.', 'error');
@@ -584,6 +627,8 @@ document.querySelector('[data-action="save-q9"]')?.addEventListener('click', () 
   state.answers.q9 = commitment;
   state.screensCompleted[9] = true;
 
+  trackScreenCompleted(9, 'Compromiso ambiental guardado');
+
   showFeedback(
     'feedback-q9',
     'Excelente compromiso. Elegiste una acción concreta para cuidar la casa, la escuela, el barrio o el planeta.',
@@ -612,6 +657,11 @@ document.querySelector('[data-action="download-evidence"]')?.addEventListener('c
     return;
   }
   showFeedback('feedback-q10', 'Felicitaciones. Completaste la misión y ya sos parte de la Patrulla Verde.', 'success');
+
+  trackAnalyticsEvent('mission_evidence_downloaded', {
+    event_category: 'mission',
+    event_label: 'Certificado Patrulla Verde'
+  });
 
   const date = new Date().toLocaleDateString('es-AR');
   const logoUrl = new URL('assets/logos/LogoHDC.jpg', window.location.href).href;
